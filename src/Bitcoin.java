@@ -3,7 +3,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
 
-public class Bitcoin extends Currency{
+public class Bitcoin extends Currency {
     private double hashRate;
     private int blockHeight;
 
@@ -48,7 +48,6 @@ public class Bitcoin extends Currency{
     public int getBlockHeight() {
         return blockHeight;
     }
-
 
 
 }

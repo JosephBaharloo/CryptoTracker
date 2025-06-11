@@ -3,13 +3,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
-public class DbManager implements DbOpperations{
+public class DbManager implements DbOpperations {
     static String username = "root";
     static String password = "123456";
     static String url = "jdbc:mysql://localhost:3306/crypto";
@@ -42,6 +44,7 @@ public class DbManager implements DbOpperations{
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean login(String _username, String _password) {
         String query = "SELECT password FROM users WHERE username = ?";
@@ -64,7 +67,7 @@ public class DbManager implements DbOpperations{
             e.printStackTrace();
             return false;
         }
-    };
+    }
 
 
     public static void displayAllCoins() {
@@ -151,11 +154,6 @@ public class DbManager implements DbOpperations{
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
 
 }

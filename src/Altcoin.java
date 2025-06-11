@@ -30,10 +30,10 @@ public class Altcoin extends Currency {
             stmt.setBoolean(5, isStakeable);
 
             stmt.executeUpdate();
-            System.out.println(getName() +  " inserted!");
+            System.out.println(getName() + " inserted!");
 
         } catch (SQLException e) {
-            System.err.println("Failed to insert "+ getName() + ":");
+            System.err.println("Failed to insert " + getName() + ":");
             e.printStackTrace();
         }
     }
