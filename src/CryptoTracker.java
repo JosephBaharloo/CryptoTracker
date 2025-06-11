@@ -12,12 +12,26 @@ public class CryptoTracker {
         Bitcoin btc = new Bitcoin("Bitcoin", "BTC", 104652, 64.54, 901254);
         Ethereum eth = new Ethereum("Ethereum", "eth", 2500, 1000000000, 0.005);
         Altcoin xrp = new Altcoin("Ripple", "xrp", 2.22);
-        Altcoin ada = new Altcoin("Cardano", "ada", 0.7, true, "evm");
+        Altcoin DOGE = new Altcoin("Dogecoin", "DOGE", 0.1942);
+        Altcoin ada = new Altcoin("Cardano", "ada", 0.7, true, "Ethereum");
+        Altcoin USDT = new Altcoin("Tether", "USDT", 1.00, false, "Ethereum");
+        Altcoin BNB = new Altcoin("BNB", "BNB", 665.61, true, "BNB");
+        Altcoin sol = new Altcoin("Solana", "sol", 161.64, true, "Solana");
+        Altcoin avax = new Altcoin("Avalanche", "avax", 21.66, false, "Avalanche");
+        Altcoin XLM = new Altcoin("Stellar", "XLM", 0.2781, true, "Stellar");
+        Altcoin trx = new Altcoin("TRON", "trx", 0.2779, false, "TRON");
 
         btc.save();
         eth.save();
         xrp.save();
+        DOGE.save();
         ada.save();
+        USDT.save();
+        BNB.save();
+        sol.save();
+        avax.save();
+        XLM.save();
+        trx.save();
 
 //        ++++++++++++++++ user ++++++++++++++++
         Scanner scanner = new Scanner(System.in);
@@ -26,66 +40,6 @@ public class CryptoTracker {
 
         System.out.println("Welcome to Crypto Tracker\n1. Register\n2. Login ");
         int choice = scanner.nextInt();
-
-//        if (choice == 1) {
-//
-//            System.out.println("Enter Username:");
-//            String username = scanner.next();
-//            loggedInUser = username;
-//
-//            System.out.println("Enter Password:");
-//            String password = scanner.next();
-//            String email;
-//            scanner.nextLine();
-//            while (true) {
-//                System.out.println("Enter Email:");
-//                email = scanner.nextLine();
-//                if (email.equalsIgnoreCase("done") || email.isEmpty()) {
-//                    break;
-//                }
-//                if (isEmailValid(email)) {
-//                    break;
-//                } else {
-//                    System.out.println("Enter a valid email adress!");
-//                }
-//
-//            }
-//
-//            User u1;
-//            if (email.isEmpty()) {
-//                u1 = new User(username, password); // use constructor without coins
-//            } else {
-//                u1 = new User(username, password, email);
-//            }
-//
-//
-//            dbManager.register(u1);
-//
-//        } else if (choice == 2) {
-//            while (true){
-//                scanner.nextLine();
-//
-//                System.out.println("Enter Username:");
-//                String username = scanner.nextLine().replaceAll("\\s+", "").trim();
-//
-//                loggedInUser = username;
-//
-//                System.out.println("Enter Password:");
-//                String password = scanner.next();
-//
-//
-//                if (dbManager.login(username, password)) {
-//                    System.out.println("Login successful!");
-//                    break;
-//                } else {
-//                    System.out.println("Invalid username or password.");
-//                }
-//            }
-//
-//
-//        } else {
-//            System.out.println("Invalid choice");
-//        }
 
         if (choice == 1) {
             loggedInUser = User.appRegister(scanner, dbManager);
@@ -99,10 +53,10 @@ public class CryptoTracker {
 
 
         System.out.println("Would you like to add favorite coins? (yes/no):");
-        scanner.nextLine(); // clear buffer
+        scanner.nextLine();
         String response = scanner.nextLine().replaceAll("\\s+", "").trim().toLowerCase();
 
-        // Use the logged-in username to add favorite coins
+
         if (response.equals("yes")) {
             dbManager.addFavoriteCoins(loggedInUser, scanner);
 
