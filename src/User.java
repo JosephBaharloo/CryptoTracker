@@ -10,7 +10,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.email = email;
 
     }
 
@@ -18,7 +17,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.favoriteCoins = favoriteCoins;
 
     }
 
@@ -34,7 +32,8 @@ public class User {
         while (true) {
             System.out.println("Enter Email:");
             email = scanner.next();
-            if (email.equalsIgnoreCase("done") || email.isEmpty()) {
+            if (email.equalsIgnoreCase("null") || email.isEmpty()) {
+                email = null; // Set to null if user enters 'null' or leaves it blank
                 break;
             }
             if (isEmailValid(email)) {
@@ -45,7 +44,7 @@ public class User {
         }
 
         User u1;
-        if (email.isEmpty()) {
+        if (email == null) {
             u1 = new User(username, password); // use constructor without email
         } else {
             u1 = new User(username, password, email);

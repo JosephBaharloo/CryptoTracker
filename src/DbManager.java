@@ -110,8 +110,13 @@ public class DbManager implements DbOpperations {
         System.out.println("Enter symbols of favorite coins (type 'done' to finish):");
         while (true) {
             String input = scanner.nextLine().trim().toUpperCase();
-            if (input.equals("DONE")) break;
-            if (!input.isEmpty()) newFavorites.add(input);
+            if (input.equals("DONE")){
+                break;
+            }
+
+            if (!input.isEmpty()) {
+                newFavorites.add(input);
+            }
         }
 
         if (newFavorites.isEmpty()) {
@@ -124,13 +129,20 @@ public class DbManager implements DbOpperations {
             PreparedStatement selectStmt = conn.prepareStatement(selectQuery);
             selectStmt.setString(1, username);
             ResultSet rs = selectStmt.executeQuery();
+            Gson gson = new Gson();
 
             if (rs.next()) {
                 String currentCoins = rs.getString("favorite_coins");
                 ArrayList<String> coinList = new ArrayList<>();
 
                 if (currentCoins != null && !currentCoins.isEmpty()) {
-                    coinList = new ArrayList<>(List.of(currentCoins.split(",")));
+                    // Parse JSON to ArrayList
+                    String[] coinsArray = gson.fromJson(currentCoins, String[].class);
+                    if (coinsArray != null) {
+                        for (String coin : coinsArray) {
+                            coinList.add(coin);
+                        }
+                    }
                 }
 
                 for (String coin : newFavorites) {
@@ -139,7 +151,6 @@ public class DbManager implements DbOpperations {
                     }
                 }
 
-                Gson gson = new Gson();
                 String updatedCoins = gson.toJson(coinList);
 
                 String updateQuery = "UPDATE users SET favorite_coins = ? WHERE username = ?";
