@@ -32,9 +32,6 @@ public class DbManager implements DbOpperations {
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            Gson gson = new Gson();
-            String coinsJson = gson.toJson(user.getFavoriteCoins());
-
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
             stmt.setString(3, user.getEmail());
@@ -77,10 +74,10 @@ public class DbManager implements DbOpperations {
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            System.out.println("-------------------------------------------------------------------------------------------------------------");
-            System.out.printf("| %-15s | %-10s | %-10s | %-10s | %-12s | %-10s | %-14s | %-11s |\n",
-                    "Name", "Symbol", "Price", "HashRate", "BlockHeight", "GasPrice", "TotalSupply", "Stackable");
-            System.out.println("-------------------------------------------------------------------------------------------------------------");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("| %-15s | %-10s | %-10s | %-10s | %-12s | %-10s | %-14s | %-11s | %-15s |\n",
+                    "Name", "Symbol", "Price", "HashRate", "BlockHeight", "GasPrice", "TotalSupply", "Stackable", "blockchain");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
 
             while (rs.next()) {
                 String name = rs.getString("name");
@@ -91,12 +88,13 @@ public class DbManager implements DbOpperations {
                 String gasPrice = rs.getObject("gasPrice") != null ? String.valueOf(rs.getDouble("gasPrice")) : "N/A";
                 String totalSupply = rs.getObject("totalSupply") != null ? String.valueOf(rs.getLong("totalSupply")) : "N/A";
                 String isStackable = rs.getObject("isStackable") != null ? (rs.getBoolean("isStackable") ? "Yes" : "No") : "N/A";
+                String blockchain = rs.getString("blockchain");
 
-                System.out.printf("| %-15s | %-10s | %-10.2f | %-10s | %-12s | %-10s | %-14s | %-11s |\n",
-                        name, symbol, price, hashRate, blockHeight, gasPrice, totalSupply, isStackable);
+                System.out.printf("| %-15s | %-10s | %-10.2f | %-10s | %-12s | %-10s | %-14s | %-11s | %-15s |\n",
+                        name, symbol, price, hashRate, blockHeight, gasPrice, totalSupply, isStackable, blockchain);
             }
 
-            System.out.println("-------------------------------------------------------------------------------------------------------------");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
 
         } catch (SQLException e) {
             System.out.println("Failed to fetch data from database:");
@@ -110,7 +108,7 @@ public class DbManager implements DbOpperations {
         System.out.println("Enter symbols of favorite coins (type 'done' to finish):");
         while (true) {
             String input = scanner.nextLine().trim().toUpperCase();
-            if (input.equals("DONE")){
+            if (input.equals("DONE")) {
                 break;
             }
 
