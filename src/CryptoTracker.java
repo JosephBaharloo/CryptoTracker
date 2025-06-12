@@ -7,7 +7,7 @@ public class CryptoTracker {
 
     public static void main(String[] args) {
 
-//        ++++++++++++++++ Server ++++++++++++++++
+//        ++++++++++++++++ Coins ++++++++++++++++
 
         Bitcoin btc = new Bitcoin("Bitcoin", "BTC", 104652, 64.54, 901254);
         Ethereum eth = new Ethereum("Ethereum", "eth", 2500, 1000000000, 0.005);
@@ -33,7 +33,10 @@ public class CryptoTracker {
         XLM.save();
         trx.save();
 
-//        ++++++++++++++++ user ++++++++++++++++
+
+//        ++++++++++++++++ User ++++++++++++++++
+
+
         Scanner scanner = new Scanner(System.in);
         String loggedInUser = "";
         DbManager dbManager = new DbManager();

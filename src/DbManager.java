@@ -20,11 +20,6 @@ public class DbManager implements DbOpperations {
         return DriverManager.getConnection(url, username, password);
     }
 
-    public void showError(SQLException e) {
-        System.out.println("Error: " + e.getMessage());
-        System.out.println("Error Code: " + e.getErrorCode());
-    }
-
     @Override
     public void register(User user) {
         String query = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
