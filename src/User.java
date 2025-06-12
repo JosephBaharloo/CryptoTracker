@@ -20,6 +20,10 @@ public class User {
 
     }
 
+    private static boolean isEmailValid(String email) {
+        return email.contains("@") && email.contains(".com") && email.indexOf("@") < email.indexOf(".com");
+    }
+
     public static String appRegister(Scanner scanner, DbManager dbManager) {
         System.out.println("Enter Username:");
         String username = scanner.next();
@@ -27,7 +31,7 @@ public class User {
         System.out.println("Enter Password:");
         String password = scanner.next();
         String email;
-        scanner.nextLine(); // consume remaining newline
+        scanner.nextLine();
 
         while (true) {
             System.out.println("Enter Email:");
@@ -56,7 +60,7 @@ public class User {
 
     public static String appLogin(Scanner scanner, DbManager dbManager) {
         while (true) {
-            scanner.nextLine(); // consume any remaining newline
+            scanner.nextLine();
 
             System.out.println("Enter Username:");
             String username = scanner.nextLine().replaceAll("\\s+", "").trim();
@@ -73,10 +77,6 @@ public class User {
         }
     }
 
-    private static boolean isEmailValid(String email) {
-        // Add your email validation logic here
-        return email.contains("@") && email.contains(".com") && email.indexOf("@") < email.indexOf(".com");
-    }
 
 
     public ArrayList<String> getFavoriteCoins() {

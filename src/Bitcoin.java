@@ -22,7 +22,7 @@ public class Bitcoin extends Currency {
     public void save() {
         String query = "INSERT INTO coins (name, symbol, price, hashRate, blockHeight) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = DbManager.getConnection();  // use a shared method
+        try (Connection conn = DbManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, getName());

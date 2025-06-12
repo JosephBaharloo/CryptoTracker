@@ -54,10 +54,10 @@ public class DbManager implements DbOpperations {
 
             if (rs.next()) {
                 String storedPassword = rs.getString("password");
-                return storedPassword.equals(_password); // You can add hashing here if needed
+                return storedPassword.equals(_password);
             } else {
                 System.out.println("Username not found");
-                return false; // Username not found
+                return false;
             }
 
         } catch (SQLException e) {
